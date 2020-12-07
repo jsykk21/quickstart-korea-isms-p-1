@@ -2,25 +2,25 @@
 .Network configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
-|Parameter label (name) |Default value|Description|The First Availability zone
-(`AvailabilityZoneA`)|`**__Requires input__**`|The name of Availability Zone 1.|The Second Availability zone
-(`AvailabilityZoneB`)|`**__Requires input__**`|The name of Availability Zone 2. This must be different from the name of the first Availability Zone.
+|Parameter label (name) |Default value|Description|The first Availability Zone
+(`AvailabilityZoneA`)|`**__Requires input__**`|The name of Availability Zone 1.|The second Availability Zone
+(`AvailabilityZoneB`)|`**__Requires input__**`|The name of Availability Zone 2. Name must be different from the name of the first Availability Zone.
 |===
-.ISMS Configuration
+.ISMS configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
-|Parameter label (name) |Default value|Description|Key Pair Name for Bastion Host
-(`EC2KeyPairBastion`)|`**__Requires input__**`|The SSH key pair in your account to use for the bastion host login. This is one of the keys that you created in the pre-deployment steps.|Key Pair Name for production instances
+|Parameter label (name) |Default value|Description|Key pair name for bastion host
+(`EC2KeyPairBastion`)|`**__Requires input__**`|The SSH key pair in your account to use for the bastion host login. This is one of the keys that you created in the pre-deployment steps.|Key pair name for production instances
 (`EC2KeyPair`)|`**__Requires input__**`|The SSH key pair in your account to use for all other EC2 instance logins. This is one of the keys that you created in the pre-deployment steps. logins|**NO_LABEL**
-(`DBUsername`)|`admin`|User name for connecting to the database instance.|CIDR for access bastion host
-(`BastionCIDR`)|`0.0.0.0/0`|Allowed CIDR block for external access (use VPC CIDR).|Enable Guard Duty
-(`EnableGuardDuty`)|`enable`|If you do not currently have Guard Duty enabled in your account.
+(`DBUsername`)|`admin`|User name for connecting to the database instance.|CIDR for accessing bastion host
+(`BastionCIDR`)|`0.0.0.0/0`|Allowed CIDR block for external access (use VPC CIDR).|Enable Amazon GuardDuty
+(`EnableGuardDuty`)|`enable`|Enable GuardDuty, if it is currently diabled in your account.
 |===
-.Quick Start configuration
+.AWS Quick Start configuration
 [width="100%",cols="16%,11%,73%",options="header",]
 |===
 |Parameter label (name) |Default value|Description|Quick Start S3 bucket name
-(`QSS3BucketName`)|`aws-quickstart`|S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-). If you are unsure, do not change this value.|Quick Start S3 bucket Region
-(`QSS3BucketRegion`)|`us-east-1`|AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|Quick Start S3 key prefix
-(`QSS3KeyPrefix`)|`quickstart-korea-isms-p/`|S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/). If you are unsure, do not change this value.
+(`QSS3BucketName`)|`aws-quickstart`|Name of the S3 bucket for your copy of the Quick Start assets. Keep the default name unless you are customizing the template. Changing the name updates code references to point to a new Quick Start location. This name can include numbers, lowercase letters, uppercase letters, and hyphens, but do not start or end with a hyphen (-). See https://aws-quickstart.github.io/option1.html.|Quick Start S3 bucket Region
+(`QSS3BucketRegion`)|`us-east-1`|AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing this Region updates code references to point to a new Quick Start location. When using your own bucket, specify the Region. See https://aws-quickstart.github.io/option1.html.|Quick Start S3 key prefix
+(`QSS3KeyPrefix`)|`quickstart-korea-isms-p/`|S3 key prefix that is used to simulate a directory for your copy of the Quick Start assets. Keep the default prefix unless you are customizing the template. Changing this prefix updates code references to point to a new Quick Start location. This prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/). See https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html and https://aws-quickstart.github.io/option1.html.
 |===

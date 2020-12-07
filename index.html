@@ -804,17 +804,17 @@ p.footer-text a{color:#d7d8d8}
 <li><a href="#_deployment_steps">Deployment steps</a>
 <ul class="sectlevel2">
 <li><a href="#_sign_in_to_your_aws_account">Sign in to your AWS account</a></li>
-<li><a href="#_make_sure_that_at_least_one_amazon_ec2_key_pair_exists_in_your_aws_account_in_the_region_where_you_plan_to_deploy_the_quick_start">Make sure that at least one Amazon EC2 key pair exists in your AWS account in the Region where you plan to deploy the Quick Start.</a></li>
-<li><a href="#_ensure_you_have_the_correct_iam_permissions">Ensure you have the correct IAM permissions</a></li>
-<li><a href="#_check_the_status_of_amazon_guardduty_and_aws_config">Check the status of Amazon GuardDuty and AWS Config</a></li>
+<li><a href="#_confirm_amazon_ec2_key_pair">Confirm Amazon EC2 key pair</a></li>
+<li><a href="#_confirm_iam_permissions">Confirm IAM permissions</a></li>
+<li><a href="#_check_status_of_amazon_guardduty_and_aws_config">Check status of Amazon GuardDuty and AWS Config</a></li>
 <li><a href="#_launch_the_quick_start">Launch the Quick Start</a></li>
 </ul>
 </li>
 <li><a href="#_test_the_deployment">Test the deployment</a></li>
-<li><a href="#_deletion">Deletion</a>
+<li><a href="#_delete_template_and_resources">Delete template and resources</a>
 <ul class="sectlevel2">
-<li><a href="#step-1.-delete-the-cloudformation-template">Step 1. Delete the CloudFormation template</a></li>
-<li><a href="#step-2.-identify-and-cleanse-undeleted-resources">Step 2. Identify and cleanse undeleted resources</a></li>
+<li><a href="#step-1.-delete-the-cloudformation-template">Delete the CloudFormation template</a></li>
+<li><a href="#step-2.-identify-and-cleanse-undeleted-resources">Identify and remove undeleted resources</a></li>
 </ul>
 </li>
 <li><a href="#_best_practices_for_using_isms_p_on_aws">Best practices for using ISMS-P on AWS</a></li>
@@ -823,7 +823,7 @@ p.footer-text a{color:#d7d8d8}
 <li><a href="#_faq">FAQ</a></li>
 <li><a href="#_parameter_reference">Parameter reference</a>
 <ul class="sectlevel2">
-<li><a href="#_launch_into_a_new_vpc">Launch into a new VPC</a></li>
+<li><a href="#_parameters_for_launch_into_a_new_vpc">Parameters for launch into a new VPC</a></li>
 </ul>
 </li>
 <li><a href="#_send_us_feedback">Send us feedback</a></li>
@@ -844,7 +844,7 @@ p.footer-text a{color:#d7d8d8}
 </div>
 </div>
 <div class="paragraph text-center">
-<p><strong>November 2020</strong><br>
+<p><strong>December 2020</strong><br>
 <em>SK Infosec</em><br>
 <em>Troy Ameigh, Dave May, AWS Quick Start team</em></p>
 </div>
@@ -870,13 +870,13 @@ report bugs, or submit feature ideas for this Quick Start.
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This Quick Start reference deployment guide provides step-by-step instructions for deploying <a href="https://aws.amazon.com/ko/compliance/k-isms/?nc1=h_ls">ISMS-P</a> architecture-based resources and environment on the AWS cloud.</p>
+<p>This Quick Start deployment guide provides step-by-step instructions for deploying <a href="https://aws.amazon.com/ko/compliance/k-isms/?nc1=h_ls">ISMS-P</a>, an architecture-based environment and resources, on the AWS Cloud.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start is for organizations and users whose goal is to create cloud-based security infrastructure and services in compliance with the Personal Information &amp; Information Security Management System (ISMS-P) as required by the Personal Information Protection Act and Act on Promotion of Information and Communications Network Utilization and Information Protection, Etc.</p>
+<p>This Quick Start is for organizations and users who need to create a cloud-based security infrastructure and services that comply with the Personal Information and Information Security Management System (ISMS-P), as required by the Personal Information Protection Act and Act on Promotion of Information and Communications Network Utilization and Information Protection, etc.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start solution is designed to implement as many ISMS-P package controls as possible, but may not include all solutions recommended.</p>
+<p>This Quick Start solution is designed to implement as many ISMS-P package controls as possible, but may not include all solutions that are recommended.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -896,7 +896,7 @@ Amazon may share user-deployment information with the AWS Partner that collabora
 <h2 id="_isms_p_on_aws">ISMS-P on AWS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This reference architecture includes security and management services that meet ISMS-P control requirements and ways to combine different AWS services to support general multi-tier web applications.</p>
+<p>This reference architecture includes security and management services that meet ISMS-P control requirements. It demonstrates how to combine different AWS services to support general multi-tier web applications.</p>
 </div>
 </div>
 </div>
@@ -940,11 +940,11 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <h2 id="_architecture">Architecture</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Deploying this Quick Start template builds the following AWS cloud architecture that achieves the key requirements of ISMS-P controls. It configures AWS security services and delivers essential security for critical data and infrastructure.</p>
+<p>Deploying this Quick Start template builds the following AWS Cloud architecture to meet the key requirements of ISMS-P controls. It configures AWS security services for critical data and infrastructure.</p>
 </div>
 <div id="architecture1" class="imageblock">
 <div class="content">
-<img src="images/architecture_diagram.png" alt="Architecture" width="100%" height="100%">
+<img src="images/K-ISMS-architecture-diagram.png" alt="Architecture" width="100%" height="100%">
 </div>
 <div class="title">Figure 1. Quick Start architecture for ISMS-P on AWS</div>
 </div>
@@ -954,107 +954,75 @@ After you deploy the Quick Start, <a href="https://docs.aws.amazon.com/awsaccoun
 <div class="ulist">
 <ul>
 <li>
-<p>A multi-service Availability Zone (AZ) architecture with management and production VPCs</p>
+<p>A multi-service Availability Zone (AZ) architecture with management and production virtual private networks (VPC).</p>
+</li>
+<li>
+<p>In the management VPC:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>In the management VPC, a bastion host in a public subnet that enables system administrator access and connection via Secure Shell (SSH) for troubleshooting EC2 instances.</p>
+<p>AWS-managed network address translation (NAT) gateways to control public network access by the resources in the private subnets.</p>
 </li>
 <li>
-<p>In the production VPC, web and application instances with public (front-end) and private (back-end) subnets for web, application, and database layers.</p>
+<p>A bastion host in a public subnet that provides system administrator access and connection via Secure Shell (SSH) for troubleshooting Amazon Elastic Compute Cloud (Amazon EC2) instances. The bastion host is assigned an Elastic IP address (EIP).</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Standard security groups for EC2 instances.</p>
+<p>In the production VPC:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>AWS-managed network address translation (NAT) gateways to control public network access by the resources in the private subnets.</p>
 </li>
 <li>
-<p>Default AWS Identity and Access Management configurations that include groups, roles, and instance profiles as well as customizable IAM policies.</p>
+<p>Web and application instances with public (front-end) and private (back-end) subnets for web, application, and database layers.</p>
 </li>
 <li>
-<p>AWS Key Management Service (KMS) for CloudTrail and RDS key encryption.</p>
+<p>A redundant Amazon Relational Database Service (Amazon RDS) database in a multi-AZ configuration.</p>
 </li>
 <li>
-<p>Rules to examine encryption policies.</p>
+<p>Separate Auto Scaling groups for web and application instances to secure high availability, and a three-tier web application (WordPress) that supports load balancing with Application Load Balancer.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Standard security groups for Amazon EC2 instances.</p>
+</li>
+<li>
+<p>Default AWS Identity and Access Management (IAM) configurations that include groups, roles, and instance profiles as well as customizable IAM policies.</p>
+</li>
+<li>
+<p>AWS Key Management Service (AWS KMS) for AWS CloudTrail and Amazon RDS key encryption.</p>
 </li>
 <li>
 <p>Amazon GuardDuty to identify external intrusion threats.</p>
 </li>
 <li>
-<p>Notification policies based on SNS topics to capture RDS CPU/Storage alarms.</p>
+<p>Notification policies based on Amazon Simple Notification Service (Amazon SNS) topics to capture Amazon RDS CPU and storage alarms.</p>
 </li>
 <li>
 <p>AWS Config rules to monitor security policies and compliance.</p>
 </li>
 <li>
-<p>An AWS WAF that creates response rules (Core Rule, WordPress, Application, SQL database, PHP application) automatically against the top tem Open Web Application Security Project (OWASP) vulnerabilities.</p>
+<p>An AWS WAF that creates response rules (Core Rule, WordPress, Application, SQL database, PHP application) automatically against the top 10 Open Web Application Security Project (OWASP) vulnerabilities.</p>
 </li>
 <li>
-<p>Separate Auto Scaling groups for web and application instances to secure high availability, and a three-tier web application (WordPress) that supports Application Load Balancers.</p>
+<p>Amazon Simple Storage Service (Amazon S3) buckets for centralized logging and AWS WAF.</p>
 </li>
 <li>
-<p>S3 buckets for centralized logging and AWS WAF.</p>
+<p>Amazon CloudWatch metric filters and alarms to monitor various aspects of the infrastructure, including the reliability, availability, and performance of Amazon RDS.</p>
 </li>
 <li>
-<p>A redundant Amazon Relational Database Service (RDS) database in a multi-AZ configuration.</p>
+<p>Amazon CloudWatch alarms to trigger Amazon SNS topics and send email notifications.</p>
 </li>
 <li>
-<p>AWS-managed network address translation (NAT) gateways to control public network access by the resources in the private subnets.</p>
+<p>AWS Systems Manager for managing Amazon Machine Images (AMI) and keeping them current.</p>
 </li>
 <li>
-<p>11 CloudWatch metric filters and alarms with following topics:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-s3-bucket-activity">Amazon
-S3 bucket activity</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-security-group">Security
-Group configuration changes</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-network-acl">Network
-Access Control List (ACL) changes</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-gateway-changes">Network
-cateway changes</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-vpc-changes">Amazon
-Virtual Private Cloud (VPC) changes</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-ec2-instance-changes">Amazon
-EC2 instance changes</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-ec2-large-instance-changes">EC2
-Large instance changes</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-cloudtrail-changes">CloudTrail
-changes</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-signin">Console
-sign-in failures</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-authorization-failures">Authorization
-failures</a></p>
-</li>
-<li>
-<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-iam-policy-changes">IAM
-policy changes</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>4 CloudWatch alarms to monitor the reliability, availability, and performance of Amazon RDS. CloudWatch alarms trigger Amazon SNS topics and send email notifications.</p>
+<p>The AWS Secrets Manager for creating and rotating the database password.</p>
 </li>
 </ul>
 </div>
@@ -1069,7 +1037,7 @@ policy changes</a></p>
 <p>This deployment requires a moderate level of familiarity with AWS services. If you’re new to AWS, visit <a href="https://aws.amazon.com/getting-started/" target="_blank" rel="noopener">Getting Started with AWS</a> and <a href="https://aws.amazon.com/training/" target="_blank" rel="noopener">Training and Certification</a>. These sites provide materials for learning how to design, deploy, and operate your infrastructure and applications on the AWS Cloud.</p>
 </div>
 <div class="paragraph">
-<p>This Quick Start assumes familiarity with the ISMS-P reference architecture. Refer to <a href="https://aws.amazon.com/ko/artifact/">AWS Artifact</a> or <a href="https://aws.amazon.com/ko/compliance/k-isms/?nc1=h_ls">ISMS compliance</a> for more information.</p>
+<p>This Quick Start assumes familiarity with the ISMS-P reference architecture. See <a href="https://aws.amazon.com/ko/artifact/">AWS Artifact</a> or <a href="https://aws.amazon.com/ko/compliance/k-isms/?nc1=h_ls">ISMS compliance</a> for more information.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1173,7 +1141,7 @@ policy changes</a></p>
 <div class="sect3">
 <h4 id="_supported_regions">Supported Regions</h4>
 <div class="paragraph">
-<p>This deployment includes services that may not be available in all AWS regions (i.e., AWS Auto Scaling, AWS WAF, AWS Firewall Manager). See the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html">Service endpoints and quotas</a> and <a href="https://aws.amazon.com/ko/about-aws/global-infrastructure/regional-product-services/?nc1=h_ls">AWS Regional Services List</a> to find the latest list of regions that support these services.</p>
+<p>This deployment includes services that may not be available in all AWS Regions (for example, AWS Auto Scaling, AWS WAF, and AWS Firewall Manager). See the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html">Service endpoints and quotas</a> and <a href="https://aws.amazon.com/ko/about-aws/global-infrastructure/regional-product-services/?nc1=h_ls">AWS Regional Services List</a> to find the latest list of Regions that support these services.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1206,14 +1174,10 @@ Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.
 <div class="sect3">
 <h4 id="_deployment_options">Deployment options</h4>
 <div class="paragraph">
-<p>This Quick Start provides one deployment option:</p>
+<p>This Quick Start provides the following deployment option:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p><strong>Deploy ISMS-P into a new VPC</strong>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys ISMS-P into this new VPC.</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -1236,30 +1200,32 @@ Certain Regions are available on an opt-in basis. See <a href="https://docs.aws.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_make_sure_that_at_least_one_amazon_ec2_key_pair_exists_in_your_aws_account_in_the_region_where_you_plan_to_deploy_the_quick_start">Make sure that at least one Amazon EC2 key pair exists in your AWS account in the Region where you plan to deploy the Quick Start.</h3>
+<h3 id="_confirm_amazon_ec2_key_pair">Confirm Amazon EC2 key pair</h3>
 <div class="paragraph">
-<p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Key pair</a> a|
-Make note of the key pair name. You need it during deployment. To create a key pair, follow the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">instructions in the AWS documentation</a>.</p>
+<p>Make sure that at least one Amazon EC2 key pair exists in your AWS account in the Region where you plan to deploy the Quick Start.</p>
 </div>
 <div class="paragraph">
-<p>For testing or proof-of-concept purposes, we recommend creating a new key pair instead of using one that’s already being used by a production instance.</p>
+<p>Make note of the key pair name, as you will need it during deployment. To create a key pair, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs and Linux instances</a>.</p>
+</div>
+<div class="paragraph">
+<p>For testing or proof-of-concept purposes, create a new key pair instead of using one that’s already being used by a production instance.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ensure_you_have_the_correct_iam_permissions">Ensure you have the correct IAM permissions</h3>
+<h3 id="_confirm_iam_permissions">Confirm IAM permissions</h3>
 <div class="paragraph">
-<p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html">IAM permissions</a> |Before launching the Quick Start, you must log in to the AWS Management Console with IAM permissions for the resources and actions the templates deploy. The <em>AdministratorAccess managed policy within IAM provides sufficient permissions</em>, although your organization may choose to use a custom policy with more restrictions.</p>
+<p>Before launching the Quick Start, log in to the AWS Management Console with IAM permissions for the resources and actions the templates deploy. The <em>AdministratorAccess</em> managed policy within IAM provides sufficient permissions, although your organization may choose to use a custom policy with more restrictions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html">AWS managed policies for job functions</a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_check_the_status_of_amazon_guardduty_and_aws_config">Check the status of Amazon GuardDuty and AWS Config</h3>
+<h3 id="_check_status_of_amazon_guardduty_and_aws_config">Check status of Amazon GuardDuty and AWS Config</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_suspend-disable.html">Disable</a> Amazon GuardDuty or set the "EnableGuardDuty" CloudFormation parameter to "Disable" if it is enabled in your region. An attempt to deploy a GuardDuty detector to an account with an already configured detector will result in a deployment failure.</p>
+<p>Disable Amazon GuardDuty or set the <em>EnableGuardDuty</em> CloudFormation parameter to <em>Disable</em> if it is enabled in your Region. If you attempt to deploy a GuardDuty detector to an account with an already-configured detector, the deployment will fail. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_suspend-disable.html">Suspending or disabling GuardDuty</a>.</p>
 </li>
 <li>
-<p><a href="https://docs.aws.amazon.com/ko_kr/config/latest/developerguide/gs-console.html">Enable</a> AWS Config if it is disabled in your region to avoid trouble during deployment.</p>
+<p>Enable AWS Config if it is disabled in your Region to avoid trouble during deployment. For more information, see <a href="https://docs.aws.amazon.com/ko_kr/config/latest/developerguide/gs-console.html">Setting up AWS Config through the console</a>.</p>
 </li>
 </ol>
 </div>
@@ -1281,7 +1247,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Sign in to your AWS account, and choose one of the following options to launch the AWS CloudFormation template. For help with choosing an option, see <a href="#_deployment_options">Deployment options</a> earlier in this guide.</p>
+<p>Sign in to your AWS account, and choose the following option to launch the AWS CloudFormation template.</p>
 </li>
 </ol>
 </div>
@@ -1292,8 +1258,8 @@ You are responsible for the cost of the AWS services used while running this Qui
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_launch_permalink" target="_blank" rel="noopener">Deploy ISMS-P into a new VPC on AWS</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://qs_template_permalink" target="_blank" rel="noopener">View template</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://fwd.aws/6WyGV" target="_blank" rel="noopener">Deploy ISMS-P into a new VPC on AWS</a></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://github.com/aws-quickstart/quickstart-korea-isms-p/blob/main/templates/isms-entrypoint-new-vpc.template.yaml" target="_blank" rel="noopener">View template</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1303,7 +1269,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>Check the AWS Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This is where the network infrastructure for ISMS-P will be built. The template is launched in the ap-northeast-2 Region by default.</p>
+<p>Check the AWS Region that’s displayed in the upper-right corner of the navigation bar, and change it if necessary. This Region is where the network infrastructure for ISMS-P is built. The template is launched in the ap-northeast-2 Region by default.</p>
 </li>
 </ol>
 </div>
@@ -1349,40 +1315,39 @@ You are responsible for the cost of the AWS services used while running this Qui
 <h2 id="_test_the_deployment">Test the deployment</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Open the links in the URL keys in the Outputs tab to navigate to the web pages that shows whether the deployment was successful. The template uses HTTPS and adopts a private certificate for better security, so you may encounter an alert window regarding the certificate being untrusted when opening the web page.</p>
+<p>Open the links in the URL keys in the <strong>Outputs</strong> tab to navigate to the web pages that shows whether the deployment was successful. The template uses HTTPS and adopts a private certificate for better security, so you may encounter an alert window regarding the certificate being untrusted when opening the web page.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_deletion">Deletion</h2>
+<h2 id="_delete_template_and_resources">Delete template and resources</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To delete the ISMS-P Quick Start resources after deployment, perform the following:</p>
+<p>To delete the ISMS-P Quick Start resources after deployment, do the following steps:</p>
 </div>
 <div class="sect2">
-<h3 id="step-1.-delete-the-cloudformation-template">Step 1. Delete the CloudFormation template</h3>
+<h3 id="step-1.-delete-the-cloudformation-template">Delete the CloudFormation template</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to CloudFormation on the AWS console. Select <strong>the name of the ISMS-P Quick Start stack</strong> you deployed. Take note that you must choose the name of stack you used to deploy the Quick Start, instead of the duplicate stack that had been created during the stack creation.</p>
+<p>Navigate to the CloudFormation area of the AWS console, and choose the name of the ISMS-P Quick Start stack that you deployed. Note that you must choose the name of the stack you used to deploy the Quick Start, not the duplicate stack generated during the stack creation.</p>
 </li>
 <li>
-<p>Select the <strong>Delete</strong> menu on top of the screen and choose <strong>Delete</strong> <strong>stack</strong> when the delete confirmation window pops up.</p>
+<p>Open the <strong>Delete</strong> menu at the top of the window and choose <strong>Delete stack</strong> in the confirmation window.</p>
 </li>
 <li>
-<p>After the deletion is complete, the <strong>state</strong> will change from DELETE_IN_PROGRESS to <strong>DELETE_COMPLETE</strong>.</p>
+<p>After the stack is deleted, the state changes from <strong>DELETE_IN_PROGRESS</strong> to <strong>DELETE_COMPLETE</strong>.</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="step-2.-identify-and-cleanse-undeleted-resources">Step 2. Identify and cleanse undeleted resources</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Though unlikely, some resources could be left undeleted if they were in use or due to some issues such as permission restrictions. If that’s the case, you can choose to select the stack and read the message that will display on the <strong>Events</strong> tab or delete the resources manually by identifying the resources that were created as a result of the Quick Start template deployment as described in the Technical requirements section of this deployment guide.</p>
-</li>
-</ol>
+<h3 id="step-2.-identify-and-cleanse-undeleted-resources">Identify and remove undeleted resources</h3>
+<div class="paragraph">
+<p>Though unlikely, some resources may remain undeleted if they are in use or experience a permission issue. If this happens, you can choose to select the stack and read the message that displays on the <strong>Events</strong> tab, or you can delete the resources manually.</p>
+</div>
+<div class="paragraph">
+<p>If deleting resources manually, you can identify the resources that were created during the Quick Start template deployment by viewing the list in the <a href="#_technical_requirements">Technical requirements</a> section of this deployment guide.</p>
 </div>
 </div>
 </div>
@@ -1391,18 +1356,18 @@ You are responsible for the cost of the AWS services used while running this Qui
 <h2 id="_best_practices_for_using_isms_p_on_aws">Best practices for using ISMS-P on AWS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Change the following before deploying this Quick Start on production workloads:</p>
+<p>Complete the following best practices before deploying this Quick Start on production workloads:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>This architecture uses a single instance and Availability Zone for the implementation of one Auto Scaling group to save costs. For a production deployment, we recommend you have your instances span across two or more Availability Zones for high availability after reviewing your environment and corresponding requirements.</p>
+<p>To save costs, this architecture uses a single instance and Availability Zone for implementing one Auto Scaling group. For a production deployment, after reviewing your environment and corresponding requirements, configure your instances to span across two or more Availability Zones for high availability.</p>
 </li>
 <li>
-<p>The class of CIDR for the VPC subnets is configured as a fixed class of 10.10.x.x or 10.100.x.x. You can change them as needed by modifying the template file before deployment.</p>
+<p>The class of Classless Inter-Domain Routing (CIDR) for the VPC subnets is configured as a fixed class of 10.10.x.x or 10.100.x.x. You can change them as needed by modifying the template file before deployment.</p>
 </li>
 <li>
-<p>This Quick Start environment is configured for testing purposes, so some NACLs are set to open and do not have traffic control in place. Make sure you adopt stronger NACL policies to meet your security requirements before deploying the template.</p>
+<p>This Quick Start environment is configured for testing purposes, so some network access control lists (NACL) are set to open and do not have traffic control in place. Make sure you adopt stronger NACL policies to meet your security requirements before deploying the template.</p>
 </li>
 <li>
 <p>You can build your personal endpoints for AWS services.</p>
@@ -1415,36 +1380,36 @@ You are responsible for the cost of the AWS services used while running this Qui
 <h2 id="_security">Security</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Ensuring security and complying with relative laws are a shared responsibility between AWS and the customer. We recommend that customers become familiar with AWS Shared Responsibility Model before applying this solution to their production workloads.</p>
+<p>Ensuring security and complying with relative laws are a shared responsibility between AWS and customers. Customers should become familiar with the AWS Shared Responsibility Model before applying this solution to their production workloads.</p>
 </div>
 <div class="paragraph">
-<p>This solution implements some of the summarized control mechanisms from the ISMS-P reference architecture, but not all recommendations to achieve each ISMS-P control are included in this Quick Start. For the guide specific to ISMS-P, see other documents or visit the <a href="https://aws.amazon.com/ko/compliance/k-isms/?nc1=h_ls">Korea Information Security Management System</a> page and follow the instructions.</p>
+<p>This solution implements certain summarized control mechanisms from the ISMS-P reference architecture, but not all recommendations to achieve each ISMS-P control are included in this Quick Start. For information that is specific to ISMS-P, see other documents or follow the instructions provided on the <a href="https://aws.amazon.com/ko/compliance/k-isms/?nc1=h_ls">Korea Information Security Management System</a> page.</p>
 </div>
 <div class="paragraph">
-<p>We recommend to always seek the latest version for the source files and deployment guide for possible updates on the ISMS-P Quick Start features and guide.</p>
+<p>Always seek the latest version for the source files and deployment guide for possible updates on the ISMS-P Quick Start features and guide.</p>
 </div>
 <div class="paragraph">
-<p>The following is the controls that are not included in this solution or need additional description:</p>
+<p>The following list describes the controls that are either not included in this solution or need additional information:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>This ISMS-P Quick Start provides internet gateways for internet connectivity, which simplifies the deployment to the level of a PoC. If you’re planning to store sensitive information in the solution, ensure that you review the ISMS-P package guidelines and comply with controls. Also, consider adopting data-in-transit encryption and AWS Direct Connect (DX) along with VPN or HTTP.</p>
+<p>This ISMS-P Quick Start provides internet gateways for internet connectivity, which simplifies the deployment to the level of proof of concept. If you’re planning to store sensitive information in the solution, ensure that you review the ISMS-P package guidelines and comply with controls. Also, consider adopting data-in-transit encryption and AWS Direct Connect (DX) along with a VPN or HTTP protocol.</p>
 </li>
 <li>
-<p>To simplify the build, this architecture uses a DNS provided by Amazon VPC. You may consider using an EC2 based or your own in-house developed DNS service.</p>
+<p>To simplify the build, this architecture uses a Domain Name System (DNS) provided by Amazon VPC. You may consider using Amazon EC2 based or your own in-house DNS service.</p>
 </li>
 <li>
-<p>The root volume of Amazon EC2 instances is not encrypted. See the New – Encrypted EBS Boot Volumes page before storing sensitive information.</p>
+<p>The root volume of Amazon EC2 instances is not encrypted. See the <strong>New – Encrypted EBS Boot Volumes</strong> page before storing sensitive information.</p>
 </li>
 <li>
-<p>No remediation has been applied for non-compliant AWS resources by AWS Config rules in this Quick Start. Visit the <a href="https://docs.aws.amazon.com/ko_kr/config/latest/developerguide/remediation.html">Remediating Noncompliant AWS Resources by AWS Config Rules</a> page for more information.</p>
+<p>Remediation has not been applied for non-compliant AWS resources by AWS Config rules in this Quick Start. See <a href="https://docs.aws.amazon.com/ko_kr/config/latest/developerguide/remediation.html">Remediating Noncompliant AWS Resources by AWS Config Rules</a> for more information.</p>
 </li>
 <li>
-<p>Consider adopting AWS KMS or a 3<sup>rd</sup> party solution to minimize the exposure of critical data to the outside world. See the <a href="https://docs.aws.amazon.com/ko_kr/kms/?id=docs_gateway">AWS KMS</a> and <a href="https://docs.aws.amazon.com/ko_kr/aws-crypto-tools/?id=docs_gateway">Crypto Tools</a> pages for details.</p>
+<p>Consider adopting AWS KMS or a third-party solution to minimize the exposure of critical data to the outside world. See <a href="https://docs.aws.amazon.com/ko_kr/kms/?id=docs_gateway">AWS Key Management Service</a> and <a href="https://docs.aws.amazon.com/ko_kr/aws-crypto-tools/?id=docs_gateway">AWS Crypto Tools</a> for details.</p>
 </li>
 <li>
-<p>AWS WAF is designed to apply five rules as a priority so that they would be considered starting points rather than a comprehensive set of rules prepared for a production environment. We recommend you determine if these rules fit your environment and security policies and apply only the rules you feel necessary for your production environment. Also, the AWS WAF action is set to Count by default to prevent tasks from being blocked. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-action.html">AWS WAF rule action</a>.</p>
+<p>AWS WAF is designed to apply five rules as a priority. These rules are considered to be starting points rather than a comprehensive set of rules prepared for a production environment. Determine if these rules fit your environment and security policies and apply only the rules that are necessary for your production environment. Also, the AWS WAF action is set to Count by default to prevent tasks from being blocked. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-action.html">AWS WAF rule action</a>.</p>
 </li>
 </ul>
 </div>
@@ -1456,16 +1421,16 @@ You are responsible for the cost of the AWS services used while running this Qui
 <div class="ulist">
 <ul>
 <li>
-<p>If you’re considering expanding the use of AWS Organizations and single sign-on (SSO) to operate a multi-account environment or to manage IAM users effectively, visit the <a href="https://docs.aws.amazon.com/ko_kr/organizations/latest/userguide/services-that-can-integrate-peregrine.html">AWS Single Sign-On and AWS Organizations</a> page.</p>
+<p>If you’re considering expanding the use of AWS Organizations and single sign-on (SSO) to operate a multi-account environment or to manage IAM users effectively, see <a href="https://docs.aws.amazon.com/ko_kr/organizations/latest/userguide/services-that-can-integrate-peregrine.html">AWS Organizations</a>.</p>
 </li>
 <li>
-<p>Review the logging and analysis features using AWS CloudTrail and AWS CloudWatch to track the creation, modification or deletion of AWS IAM user activities, infrastructure and AWS services. For more information, see the <a href="https://docs.aws.amazon.com/ko_kr/cloudtrail/index.html">AWS CloudTrail</a> and <a href="https://aws.amazon.com/ko/cloudwatch/features/">Amazon CloudWatch</a> pages.</p>
+<p>Review the logging and analysis features using AWS CloudTrail and Amazon CloudWatch to track the creation, modification, or deletion of AWS IAM user activities, infrastructure, and AWS services. For more information, see  <a href="https://docs.aws.amazon.com/ko_kr/cloudtrail/index.html">AWS CloudTrail</a> and <a href="https://aws.amazon.com/ko/cloudwatch/features/">Amazon CloudWatch</a>.</p>
 </li>
 <li>
-<p>If you’re planning to run applications or services on this infrastructure created as a result of this Quick Start deployment, find ways to securely store and manage database credentials, API keys and other security information against exposure. For details, visit the <a href="https://aws.amazon.com/ko/secrets-manager/">AWS Secret Manager</a> and AWS Systems Manager <a href="https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/systems-manager-parameter-store.html">Parameter Store</a> pages.</p>
+<p>If you’re planning to run applications or services on the infrastructure created by this Quick Start deployment, find ways to securely store and manage database credentials, API keys, and other security information against exposure. For details, see <a href="https://aws.amazon.com/ko/secrets-manager/">AWS Secrets Manager</a> and <a href="https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS Systems Manager Parameter Store</a>.</p>
 </li>
 <li>
-<p>Consider using AWS Config and AWS Config rules to continuously monitor, evaluate, and remediate security vulnerabilities. For details, see the <a href="https://aws.amazon.com/ko/config/">AWS Config</a> page.</p>
+<p>Consider using AWS Config and AWS Config rules to continuously monitor, evaluate, and remediate security vulnerabilities. For details, see <a href="https://aws.amazon.com/ko/config/">AWS Config</a>.</p>
 </li>
 </ul>
 </div>
@@ -1478,7 +1443,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 <p><strong>Q.</strong> I encountered a <strong>CREATE_FAILED</strong> error when I launched the Quick Start.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, we recommend that you relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. (This setting is under <strong>Advanced</strong> in the AWS CloudFormation console, <strong>Options</strong> page.) With this setting, the stack’s state is retained and the instance is left running, so you can troubleshoot the issue. (For Windows, look at the log files in %ProgramFiles%\Amazon\EC2ConfigService and C:\cfn\log.)</p>
+<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. This setting is under <strong>Advanced</strong> in the AWS CloudFormation console on the <strong>Configure stack Options</strong> page. With this setting, the stack’s state is retained and the instance is left running, so you can troubleshoot the issue. (For Windows, look at the log files in %ProgramFiles%\Amazon\EC2ConfigService and C:\cfn\log.)</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1499,37 +1464,65 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 <p><strong>Q.</strong> I encountered a size limitation error when I deployed the AWS CloudFormation templates.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> We recommend that you launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template size limitations. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">AWS CloudFormation quotas</a> on the AWS website.</p>
+<p><strong>A.</strong> Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template size limitations. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">AWS CloudFormation quotas</a> on the AWS website.</p>
 </div>
 <div class="paragraph">
 <p><strong>Q.</strong> A warning message is displayed when accessing the landing page.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> Different browsers may display different warning windows because of the adoption of the HTTPS protocols using private certificates. Upon recognizing the warning, you can choose to access the landing page via the Accept or Advanced pages.</p>
+<p><strong>A.</strong> Different browsers may display different warning messages due to HTTPS protocols that use private certificates. You can bypass the warning by choosing Accept or opening an Advanced page with additional options.</p>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> I failed to create the stack because a GuardDuty detector already exists in my AWS account.</p>
+<p><strong>Q.</strong> I failed to create the stack because an Amazon GuardDuty detector already exists in my AWS account.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> Disable Amazon GuardDuty in a region where you want to deploy the Quick Start or delete the GuardDuty detector from the CloudFormation template.</p>
+<p><strong>A.</strong> Disable Amazon GuardDuty in the Region where you want to deploy the Quick Start, or delete the GuardDuty detector from the CloudFormation template.</p>
 </div>
 <div class="paragraph">
 <p><strong>Q.</strong> I failed to create the stack because AWS Config was disabled in my AWS account.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> <a href="https://docs.aws.amazon.com/ko_kr/config/latest/developerguide/gs-console.html">Enable AWS Config</a> in a region where you want to deploy the Quick Start.</p>
+<p><strong>A.</strong> Enable AWS Config in a Region where you want to deploy the Quick Start. See <a href="https://docs.aws.amazon.com/ko_kr/config/latest/developerguide/gs-console.html">Setting up AWS Config through the console</a> for more information.</p>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> I wanted to set up notifications but didn’t receive a SNS subscription notice email.</p>
+<p><strong>Q.</strong> I wanted to set up notifications but didn’t receive an Amazon Simple Notification Service (SNS) subscription notice email.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> Confirm if you entered the email address correctly in NotificationList from stack details when asked to provide one when deploying the Quick Start. If wrong address, select the <strong>Update</strong> tab of the stack, replace it with the correct one, and deploy the stack again following the Deployment steps.</p>
+<p><strong>A.</strong> When prompted during the Quick Start deployment process, confirm that you entered the email address correctly in the NotificationList field in the stack details. If the address is incorrect, choose the <strong>Update</strong> tab of the stack, replace the address with the correct one, and deploy the stack again.</p>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> I deleted the CloudFormation stack deployed but some resources remain undeleted.</p>
+<p><strong>Q.</strong> I deleted the CloudFormation stack after deployment but some resources remain undeleted.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> Either a) choose the stack and check the messaged displayed on the <strong>Events</strong> tab, or b) identify the resources created as a result of the Quick Start template deployment and delete them following the applewebdata://0A124541-6BAA-480E-8D52-6D465FB7C4F9/#_Technical_requirements[Technical requirements] section.</p>
+<p><strong>A.</strong> You can check the messages displayed on the <strong>Events</strong> tab of the stack, or you can identify the resources created with the Quick Start template deployment and delete them manually. See the <a href="#_technical_requirements">Technical requirements</a> section for a list of resources used in this deployment.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q.</strong> What topics are used for the Amazon CloudWatch metric filters and alarms?</p>
+</div>
+<div class="paragraph">
+<p><strong>A.</strong> The following topics are used:
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-s3-bucket-activity">Amazon
+S3 bucket activity</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-security-group">Security
+Group configuration changes</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-network-acl">Network
+Access Control List (ACL) changes</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-gateway-changes">Network
+cateway changes</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-vpc-changes">Amazon
+Virtual Private Cloud (VPC) changes</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-ec2-instance-changes">Amazon
+EC2 instance changes</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-ec2-large-instance-changes">EC2
+Large instance changes</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-cloudtrail-changes">CloudTrail
+changes</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-signin">Console
+sign-in failures</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-authorization-failures">Authorization
+failures</a>
+* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-iam-policy-changes">IAM
+policy changes</a></p>
 </div>
 </div>
 </div>
@@ -1550,7 +1543,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </table>
 </div>
 <div class="sect2">
-<h3 id="_launch_into_a_new_vpc">Launch into a new VPC</h3>
+<h3 id="_parameters_for_launch_into_a_new_vpc">Parameters for launch into a new VPC</h3>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Network configuration</caption>
 <colgroup>
@@ -1567,21 +1560,21 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The First Availability zone
+<td class="tableblock halign-left valign-top"><p class="tableblock">The first Availability Zone
 (<code>AvailabilityZoneA</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of Availability Zone 1.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Second Availability zone
+<td class="tableblock halign-left valign-top"><p class="tableblock">The second Availability Zone
 (<code>AvailabilityZoneB</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of Availability Zone 2. This must be different from the name of the first Availability Zone.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of Availability Zone 2. Name must be different from the name of the first Availability Zone.</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. ISMS Configuration</caption>
+<caption class="title">Table 2. ISMS configuration</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1596,13 +1589,13 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Key Pair Name for Bastion Host
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key pair name for bastion host
 (<code>EC2KeyPairBastion</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The SSH key pair in your account to use for the bastion host login. This is one of the keys that you created in the pre-deployment steps.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Key Pair Name for production instances
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key pair name for production instances
 (<code>EC2KeyPair</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><em>Requires input</em></strong></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The SSH key pair in your account to use for all other EC2 instance logins. This is one of the keys that you created in the pre-deployment steps. logins</p></td>
@@ -1614,21 +1607,21 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <td class="tableblock halign-left valign-top"><p class="tableblock">User name for connecting to the database instance.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR for access bastion host
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIDR for accessing bastion host
 (<code>BastionCIDR</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.0.0.0/0</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Allowed CIDR block for external access (use VPC CIDR).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable Guard Duty
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable Amazon GuardDuty
 (<code>EnableGuardDuty</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>enable</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If you do not currently have Guard Duty enabled in your account.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable GuardDuty, if it is currently diabled in your account.</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. Quick Start configuration</caption>
+<caption class="title">Table 3. AWS Quick Start configuration</caption>
 <colgroup>
 <col style="width: 16%;">
 <col style="width: 11%;">
@@ -1646,19 +1639,19 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 bucket name
 (<code>QSS3BucketName</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>aws-quickstart</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-). If you are unsure, do not change this value.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the S3 bucket for your copy of the Quick Start assets. Keep the default name unless you are customizing the template. Changing the name updates code references to point to a new Quick Start location. This name can include numbers, lowercase letters, uppercase letters, and hyphens, but do not start or end with a hyphen (-). See <a href="https://aws-quickstart.github.io/option1.html" class="bare">https://aws-quickstart.github.io/option1.html</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 bucket Region
 (<code>QSS3BucketRegion</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>us-east-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. Keep the default Region unless you are customizing the template. Changing this Region updates code references to point to a new Quick Start location. When using your own bucket, specify the Region. See <a href="https://aws-quickstart.github.io/option1.html" class="bare">https://aws-quickstart.github.io/option1.html</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Quick Start S3 key prefix
 (<code>QSS3KeyPrefix</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>quickstart-korea-isms-p/</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/). If you are unsure, do not change this value.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S3 key prefix that is used to simulate a directory for your copy of the Quick Start assets. Keep the default prefix unless you are customizing the template. Changing this prefix updates code references to point to a new Quick Start location. This prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slashes (/). See <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html" class="bare">https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html</a> and <a href="https://aws-quickstart.github.io/option1.html" class="bare">https://aws-quickstart.github.io/option1.html</a>.</p></td>
 </tr>
 </tbody>
 </table>
