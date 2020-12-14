@@ -820,7 +820,7 @@ p.footer-text a{color:#d7d8d8}
 <li><a href="#_best_practices_for_using_isms_p_on_aws">Best practices for using ISMS-P on AWS</a></li>
 <li><a href="#_security">Security</a></li>
 <li><a href="#_other_useful_information">Other useful information</a></li>
-<li><a href="#_faq">FAQ</a></li>
+<li><a href="#_troubleshooting">Troubleshooting</a></li>
 <li><a href="#_parameter_reference">Parameter reference</a>
 <ul class="sectlevel2">
 <li><a href="#_parameters_for_launching_into_a_new_vpc">Parameters for launching into a new VPC</a></li>
@@ -1367,7 +1367,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 <p>This Quick Start environment is configured for testing purposes, so some network access control lists (NACL) are set to open and do not have traffic control in place. Make sure you adopt stronger NACL policies to meet your security requirements before deploying the template.</p>
 </li>
 <li>
-<p>You can build your personal endpoints for AWS services.</p>
+<p>Build your personal endpoints for AWS services.</p>
 </li>
 </ul>
 </div>
@@ -1394,7 +1394,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 <p>This ISMS-P Quick Start provides internet gateways for internet connectivity, which simplifies the deployment to the level of proof of concept. If you’re planning to store sensitive information in the solution, ensure that you review the ISMS-P package guidelines and comply with controls. Also, consider adopting data-in-transit encryption and AWS Direct Connect (DX) along with a VPN or HTTP protocol.</p>
 </li>
 <li>
-<p>To simplify the build, this architecture uses a Domain Name System (DNS) provided by Amazon VPC. You may consider using Amazon EC2 based or your own in-house DNS service.</p>
+<p>To simplify the build, this architecture uses a Domain Name System (DNS) provided by Amazon VPC. You may consider using Amazon EC2 or your own in-house DNS service.</p>
 </li>
 <li>
 <p>The root volume of Amazon EC2 instances is not encrypted. See the <strong>New – Encrypted EBS Boot Volumes</strong> page before storing sensitive information.</p>
@@ -1406,7 +1406,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 <p>Consider adopting AWS KMS or a third-party solution to minimize the exposure of critical data to the outside world. See <a href="https://docs.aws.amazon.com/ko_kr/kms/?id=docs_gateway">AWS Key Management Service</a> and <a href="https://docs.aws.amazon.com/ko_kr/aws-crypto-tools/?id=docs_gateway">AWS Crypto Tools</a> for details.</p>
 </li>
 <li>
-<p>AWS WAF is designed to apply five rules as a priority. These rules are considered to be starting points rather than a comprehensive set of rules prepared for a production environment. Determine if these rules fit your environment and security policies and apply only the rules that are necessary for your production environment. Also, the AWS WAF action is set to Count by default to prevent tasks from being blocked. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-action.html">AWS WAF rule action</a>.</p>
+<p>AWS WAF is designed to apply five rules as a priority. These rules are considered to be starting points rather than a comprehensive set of rules prepared for a production environment. Determine if these rules fit your environment and security policies and apply only the rules that are necessary for your production environment. Also, the AWS WAF action is set to <strong>Count</strong> by default to prevent tasks from being blocked. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-action.html">AWS WAF rule action</a>.</p>
 </li>
 </ul>
 </div>
@@ -1434,13 +1434,13 @@ You are responsible for the cost of the AWS services used while running this Qui
 </div>
 </div>
 <div class="sect1">
-<h2 id="_faq">FAQ</h2>
+<h2 id="_troubleshooting">Troubleshooting</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q.</strong> I encountered a <strong>CREATE_FAILED</strong> error when I launched the Quick Start.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. This setting is under <strong>Advanced</strong> in the AWS CloudFormation console on the <strong>Configure stack Options</strong> page. With this setting, the stack’s state is retained and the instance is left running, so you can troubleshoot the issue. (For Windows, look at the log files in %ProgramFiles%\Amazon\EC2ConfigService and C:\cfn\log.)</p>
+<p><strong>A.</strong> If AWS CloudFormation fails to create the stack, relaunch the template with <strong>Rollback on failure</strong> set to <strong>Disabled</strong>. This setting is under <strong>Advanced</strong> in the AWS CloudFormation console on the <strong>Configure stack options</strong> page. With this setting, the stack’s state is retained and the instance is left running, so you can troubleshoot the issue. (For Windows, look at the log files in %ProgramFiles%\Amazon\EC2ConfigService and C:\cfn\log.)</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1458,16 +1458,16 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 <p>For additional information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html" target="_blank" rel="noopener">Troubleshooting AWS CloudFormation</a> on the AWS website.</p>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> I encountered a size limitation error when I deployed the AWS CloudFormation templates.</p>
+<p><strong>Q.</strong> I encountered a size-limitation error when I deployed the AWS CloudFormation templates.</p>
 </div>
 <div class="paragraph">
 <p><strong>A.</strong> Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template size limitations. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">AWS CloudFormation quotas</a> on the AWS website.</p>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> A warning message is displayed when accessing the landing page.</p>
+<p><strong>Q.</strong> A warning message appears when accessing the landing page.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> Different browsers may display different warning messages due to HTTPS protocols that use private certificates. You can bypass the warning by choosing Accept or opening an Advanced page with additional options.</p>
+<p><strong>A.</strong> Different browsers may display different warning messages due to HTTPS protocols that use private certificates. You can bypass the warning by choosing <strong>Accept</strong> or opening an <strong>Advanced</strong> page with additional options.</p>
 </div>
 <div class="paragraph">
 <p><strong>Q.</strong> I failed to create the stack because an Amazon GuardDuty detector already exists in my AWS account.</p>
@@ -1482,10 +1482,10 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 <p><strong>A.</strong> Enable AWS Config in a Region where you want to deploy the Quick Start. See <a href="https://docs.aws.amazon.com/ko_kr/config/latest/developerguide/gs-console.html">Setting up AWS Config through the console</a> for more information.</p>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> I wanted to set up notifications but didn’t receive an Amazon Simple Notification Service (SNS) subscription notice email.</p>
+<p><strong>Q.</strong> I want to set up notifications but didn’t receive an Amazon Simple Notification Service (SNS) subscription email.</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> When prompted during the Quick Start deployment process, confirm that you entered the email address correctly in the NotificationList field in the stack details. If the address is incorrect, choose the <strong>Update</strong> tab of the stack, replace the address with the correct one, and deploy the stack again.</p>
+<p><strong>A.</strong> When prompted during the Quick Start deployment process, confirm that you entered the email address correctly in the <strong>NotificationList</strong> field in the stack details. If the address is incorrect, choose the <strong>Update</strong> tab of the stack, replace the address with the correct one, and deploy the stack again.</p>
 </div>
 <div class="paragraph">
 <p><strong>Q.</strong> I deleted the CloudFormation stack after deployment but some resources remain undeleted.</p>
@@ -1494,32 +1494,58 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 <p><strong>A.</strong> You can check the messages displayed on the <strong>Events</strong> tab of the stack, or you can identify the resources created with the Quick Start template deployment and delete them manually. See the <a href="#_technical_requirements">Technical requirements</a> section for a list of resources used in this deployment.</p>
 </div>
 <div class="paragraph">
-<p><strong>Q.</strong> What topics are used for the Amazon CloudWatch metric filters and alarms?</p>
+<p><strong>Q.</strong> Which topics are available to learn more about Amazon CloudWatch metric filters and alarms?</p>
 </div>
 <div class="paragraph">
-<p><strong>A.</strong> The following topics are used:
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-s3-bucket-activity">Amazon
-S3 bucket activity</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-security-group">Security
-Group configuration changes</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-network-acl">Network
-Access Control List (ACL) changes</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-gateway-changes">Network
-cateway changes</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-vpc-changes">Amazon
-Virtual Private Cloud (VPC) changes</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-ec2-instance-changes">Amazon
-EC2 instance changes</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-ec2-large-instance-changes">EC2
-Large instance changes</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-cloudtrail-changes">CloudTrail
-changes</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-signin">Console
-sign-in failures</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-authorization-failures">Authorization
-failures</a>
-* <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-iam-policy-changes">IAM
+<p><strong>A.</strong> The following topics are available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-s3-bucket-activity">Amazon
+S3 bucket activity</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-security-group">Security
+Group configuration changes</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-network-acl">Network
+Access Control List (ACL) changes</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-gateway-changes">Network
+cateway changes</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-vpc-changes">Amazon
+Virtual Private Cloud (VPC) changes</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-ec2-instance-changes">Amazon
+EC2 instance changes</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-ec2-large-instance-changes">EC2
+Large instance changes</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-cloudtrail-changes">CloudTrail
+changes</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-signin">Console
+sign-in failures</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-authorization-failures">Authorization
+failures</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html#cloudwatch-alarms-for-cloudtrail-iam-policy-changes">IAM
 policy changes</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1598,7 +1624,7 @@ Region</code>, and <code>Quick Start S3 key prefix</code>. Changing these parame
 <td class="tableblock halign-left valign-top"><p class="tableblock">The SSH key pair in your account to use for all other EC2 instance logins. This is one of the keys that you created in the pre-deployment steps. logins</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>NO_LABEL</strong>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database user name
 (<code>DBUsername</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>admin</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">User name for connecting to the database instance.</p></td>
